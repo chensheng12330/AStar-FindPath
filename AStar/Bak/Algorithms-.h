@@ -3,15 +3,15 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 // CAlgorithms
-	enum{LENGTH=40,WIDE=40};//¶¨ÒåÊı×é´óĞ¡
-	enum{VIABLE, WALL, INOPEN, INCLOSE, STARTPOINT, DESTINATION};
+enum{LENGTH=40,WIDE=40};//å®šä¹‰æ•°ç»„å¤§å°
+enum{VIABLE, WALL, INOPEN, INCLOSE, STARTPOINT, DESTINATION};
 struct Node
 {
-	//char perperty;// ÊôĞÔ£¬ ÊÇÇ½»¹ÊÇÆğµã»òÊÇÆäËû
-	int    flag; //±êÖ¾Î» 0 Îª¿É×ß£¬ 1 ÎªÇ½±Ú  2 ÔÚpenlist  
-					//3 ÔÚ closelistÖĞ 4 ÎªÆğµã 5 ÎªÖÕµã
+	//char perperty;// å±æ€§ï¼Œ æ˜¯å¢™è¿˜æ˜¯èµ·ç‚¹æˆ–æ˜¯å…¶ä»–
+	int    flag; //æ ‡å¿—ä½ 0 ä¸ºå¯èµ°ï¼Œ 1 ä¸ºå¢™å£  2 åœ¨penlist
+    //3 åœ¨ closelistä¸­ 4 ä¸ºèµ·ç‚¹ 5 ä¸ºç»ˆç‚¹
 	unsigned int location_x;
-	unsigned int location_y; 
+	unsigned int location_y;
 	unsigned int value_h;
 	unsigned int value_g;
 	unsigned int value_f;
@@ -21,7 +21,7 @@ struct Node
 
 
 /////////////////////////////////////////////////////////////
-//   ´´½¨ closelist
+//   åˆ›å»º closelist
 ////////////////////////////////////////////////////////////
 struct CloseList
 {
@@ -31,7 +31,7 @@ struct CloseList
 };
 
 ///////////////////////////////////////////////////////////////
-// ´´½¨ openlist
+// åˆ›å»º openlist
 //////////////////////////////////////////////////////////////
 struct OpenList
 {
@@ -47,28 +47,28 @@ public:
 	int startpoint_y;
 	int endpoint_x;
 	int endpoint_y;
-
+    
 public:
 	CAlgorithms();
 	virtual ~CAlgorithms();
-	public:
+public:
 	Node m_node[LENGTH][WIDE];
-
+    
 	void InitNodeMap( char aa[][WIDE], OpenList *open);
 	bool FindDestinnation(OpenList* open,CloseList* close, char aa[][WIDE]);
-	OpenList* FindMinInOpen(OpenList* open);
+	//OpenList* FindMinInOpen(OpenList* open);
 	bool Insert2OpenList(OpenList* , int x, int y);
 	bool IsInOpenList(OpenList*, int x, int y);
 	bool IsInCloseList(OpenList*, int x, int y);
 	void IsChangeParent(OpenList*, int x, int y);
 	bool IsAviable(OpenList* , int x, int y);
 	unsigned int DistanceManhattan(int d_x, int d_y, int x, int y);
-
-	unsigned int  Euclidean_dis(int sx,int sy,int ex,int ey);//Å·¼¸ÀïµÂ
-
-	unsigned int  Chebyshev_dis(int sx,int sy,int ex,int ey);//ÇĞ±ÈÑ©·ò
-	unsigned int  CAlgorithms::jiaquan_Manhattan(int sx,int sy,int ex,int ey);//¼ÓÈ¨Âü¹ş¶Ù   //better
-
+    
+	unsigned int  Euclidean_dis(int sx,int sy,int ex,int ey);//æ¬§å‡ é‡Œå¾·
+    
+	unsigned int  Chebyshev_dis(int sx,int sy,int ex,int ey);//åˆ‡æ¯”é›ªå¤«
+	unsigned int  CAlgorithms::jiaquan_Manhattan(int sx,int sy,int ex,int ey);//åŠ æƒæ›¼å“ˆé¡¿   //better
+    
 private:
 	unsigned int steps;
 protected:

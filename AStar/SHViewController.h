@@ -10,4 +10,11 @@
 
 @interface SHViewController : UIViewController
 
+- (IBAction)setStartNode:(UIButton *)sender;
+
+- (IBAction)setEndNode:(UIButton *)sender;
+- (IBAction)setWallNode:(UIButton *)sender;
+- (IBAction)begainFindPath:(UIButton *)sender;
+- (IBAction)clearAllNode:(UIButton *)sender;
+
 @end

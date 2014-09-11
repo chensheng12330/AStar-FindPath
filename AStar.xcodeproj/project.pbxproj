@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		584A466119A847BD002ABC28 /* SHLable.m in Sources */ = {isa = PBXBuildFile; fileRef = 584A466019A847BD002ABC28 /* SHLable.m */; };
+		584A466719A8963C002ABC28 /* aStart.c in Sources */ = {isa = PBXBuildFile; fileRef = 584A466619A8963C002ABC28 /* aStart.c */; };
 		5870EDE6199CAE1E0057568F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5870EDE5199CAE1E0057568F /* Foundation.framework */; };
 		5870EDE8199CAE1E0057568F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5870EDE7199CAE1E0057568F /* CoreGraphics.framework */; };
 		5870EDEA199CAE1E0057568F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5870EDE9199CAE1E0057568F /* UIKit.framework */; };
@@ -21,6 +23,7 @@
 		5870EE07199CAE1E0057568F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5870EDE9199CAE1E0057568F /* UIKit.framework */; };
 		5870EE0F199CAE1E0057568F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5870EE0D199CAE1E0057568F /* InfoPlist.strings */; };
 		5870EE11199CAE1E0057568F /* AStarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870EE10199CAE1E0057568F /* AStarTests.m */; };
+		5870EE1C199CAEE50057568F /* Bak in Resources */ = {isa = PBXBuildFile; fileRef = 5870EE1B199CAEE50057568F /* Bak */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		584A465F19A847BD002ABC28 /* SHLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLable.h; sourceTree = "<group>"; };
+		584A466019A847BD002ABC28 /* SHLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLable.m; sourceTree = "<group>"; };
+		584A466419A8925C002ABC28 /* aStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aStart.h; sourceTree = "<group>"; };
+		584A466619A8963C002ABC28 /* aStart.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aStart.c; sourceTree = "<group>"; };
 		5870EDE2199CAE1E0057568F /* AStar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AStar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5870EDE5199CAE1E0057568F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5870EDE7199CAE1E0057568F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,6 +60,7 @@
 		5870EE0C199CAE1E0057568F /* AStarTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AStarTests-Info.plist"; sourceTree = "<group>"; };
 		5870EE0E199CAE1E0057568F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5870EE10199CAE1E0057568F /* AStarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AStarTests.m; sourceTree = "<group>"; };
+		5870EE1B199CAEE50057568F /* Bak */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Bak; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		584A466219A8925C002ABC28 /* CVersion */ = {
+			isa = PBXGroup;
+			children = (
+				584A466419A8925C002ABC28 /* aStart.h */,
+				584A466619A8963C002ABC28 /* aStart.c */,
+			);
+			path = CVersion;
+			sourceTree = "<group>";
+		};
 		5870EDD9199CAE1E0057568F = {
 			isa = PBXGroup;
 			children = (
@@ -112,11 +129,16 @@
 		5870EDEB199CAE1E0057568F /* AStar */ = {
 			isa = PBXGroup;
 			children = (
+				584A466219A8925C002ABC28 /* CVersion */,
+				5870EE1B199CAEE50057568F /* Bak */,
+				5870EE1A199CAE740057568F /* Algorityhms */,
 				5870EDF4199CAE1E0057568F /* SHAppDelegate.h */,
 				5870EDF5199CAE1E0057568F /* SHAppDelegate.m */,
 				5870EDF7199CAE1E0057568F /* Main.storyboard */,
 				5870EDFA199CAE1E0057568F /* SHViewController.h */,
 				5870EDFB199CAE1E0057568F /* SHViewController.m */,
+				584A465F19A847BD002ABC28 /* SHLable.h */,
+				584A466019A847BD002ABC28 /* SHLable.m */,
 				5870EDFD199CAE1E0057568F /* Images.xcassets */,
 				5870EDEC199CAE1E0057568F /* Supporting Files */,
 			);
@@ -150,6 +172,13 @@
 				5870EE0D199CAE1E0057568F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5870EE1A199CAE740057568F /* Algorityhms */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Algorityhms;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5870EDFE199CAE1E0057568F /* Images.xcassets in Resources */,
+				5870EE1C199CAEE50057568F /* Bak in Resources */,
 				5870EDF0199CAE1E0057568F /* InfoPlist.strings in Resources */,
 				5870EDF9199CAE1E0057568F /* Main.storyboard in Resources */,
 			);
@@ -251,6 +281,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5870EDF2199CAE1E0057568F /* main.m in Sources */,
+				584A466119A847BD002ABC28 /* SHLable.m in Sources */,
+				584A466719A8963C002ABC28 /* aStart.c in Sources */,
 				5870EDFC199CAE1E0057568F /* SHViewController.m in Sources */,
 				5870EDF6199CAE1E0057568F /* SHAppDelegate.m in Sources */,
 			);
@@ -379,6 +411,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AStar/AStar-Prefix.pch";
 				INFOPLIST_FILE = "AStar/AStar-Info.plist";
@@ -392,6 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AStar/AStar-Prefix.pch";
 				INFOPLIST_FILE = "AStar/AStar-Info.plist";
@@ -459,6 +493,7 @@
 				5870EE16199CAE1E0057568F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5870EE17199CAE1E0057568F /* Build configuration list for PBXNativeTarget "AStarTests" */ = {
 			isa = XCConfigurationList;
@@ -467,6 +502,7 @@
 				5870EE19199CAE1E0057568F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -15,8 +15,23 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        
+        self.x = 0;
+        self.y = 0;
+        
+        [self setUserInteractionEnabled:YES];
+        
     }
     return self;
+}
+
+-(void) addActionEvnForTarget:(id) target Action:(SEL) action
+{
+    UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
+    
+    [self addGestureRecognizer:tapG];
+    
+    [tapG release];
 }
 
 /*
