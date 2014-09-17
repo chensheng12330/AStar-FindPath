@@ -11,6 +11,8 @@
 #import "SHLable.h"
 #import "aStart.h"
 
+#define TagMonster 2014915
+
 //#import "SHAlgorithms.h"
 
 #define AST_WIDE     WIDE
@@ -23,6 +25,13 @@ char nodeMap[AST_WIDE][AST_LENGTH];
 @property (nonatomic,retain) NSMutableArray *nodeViewMap;
 
 @property (nonatomic, assign) char curMode; //1=>起点   2=>终点  3=>墙  0=>清空
+
+@property (assign) float cellWidth;
+@property (assign) float cellHeight;
+
+@property (assign) float CanvasWidth;
+@property (assign) float CanvasHeight;
+
 @end
 
 @implementation SHViewController
@@ -40,6 +49,28 @@ char nodeMap[AST_WIDE][AST_LENGTH];
 -(void) viewTapEvent:(UITapGestureRecognizer*) tapGes
 {
     SHLable *lab = (SHLable*)tapGes.view;
+    
+    //怪物图形处理
+    if (self.curMode == 'm') {
+        
+        NSLog(@"%@",NSStringFromCGPoint(lab.center));
+        
+        float fwidth = [self.tfWidth.text  floatValue];
+        float fheight= [self.tfHeight.text floatValue];
+         
+        UIButton *Xbutton = [UIButton buttonWithType:0];
+        Xbutton.tag = TagMonster;
+        [Xbutton setFrame:CGRectMake(0, 0, fwidth, fheight)];
+        Xbutton.backgroundColor = [UIColor colorWithRed:1 green:1 blue:0 alpha:0.5];
+        Xbutton.layer.borderWidth = 1;
+        Xbutton.layer.borderColor = [UIColor greenColor].CGColor;
+        [Xbutton setCenter:lab.center];
+        [Xbutton addTarget:self action:@selector(deleteMonster:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:Xbutton];
+        
+        return;
+    }
+    ///搞完
     
     char charMode = self.curMode;
     
@@ -82,18 +113,23 @@ char nodeMap[AST_WIDE][AST_LENGTH];
     
     self.nodeViewMap = [[[NSMutableArray alloc] init] autorelease];
     
+    self.CanvasWidth= (self.view.frame.size.width-20);
+    self.CanvasHeight=(self.view.frame.size.height-60);
     
-    float viewW = (self.view.frame.size.width-20)/AST_WIDE;
-    float viewH = (self.view.frame.size.height-60)/AST_LENGTH;
+    float viewW = self.CanvasWidth/AST_WIDE;
+    float viewH = self.CanvasHeight/AST_LENGTH;
+    
+    self.cellHeight = viewH;
+    self.cellWidth  = viewW;
+    
     
     float addX = 10;
     float addY = 60;
     
-    
-    for (int i=0; i< AST_LENGTH; i++) {
+    for (int i=0; i< AST_WIDE; i++) {
         
         NSMutableArray *arViews = [[NSMutableArray alloc] init];
-        for (int j=0; j< AST_WIDE; j++) {
+        for (int j=0; j< AST_LENGTH; j++) {
             
             nodeMap[i][j] = '.';
         
@@ -102,7 +138,7 @@ char nodeMap[AST_WIDE][AST_LENGTH];
             
             tView.x = i;
             tView.y = j;
-            tView.text = [NSString stringWithFormat:@"(%d,%d)",i,j];
+            tView.text = [NSString stringWithFormat:@"(%d,%d)",j,i];
             tView.textAlignment = NSTextAlignmentCenter;
             
             tView.chart = '.';
@@ -120,6 +156,7 @@ char nodeMap[AST_WIDE][AST_LENGTH];
     
     return;
     
+    /*
     //起点
     nodeMap[0][0] = 's';
     
@@ -190,7 +227,7 @@ char nodeMap[AST_WIDE][AST_LENGTH];
     return;
     
     
-    /*
+    *
     for (int i=0; i< AST_WIDE; i++) {
         
         for (int j=0; j< AST_LENGTH; j++) {
@@ -204,11 +241,11 @@ char nodeMap[AST_WIDE][AST_LENGTH];
 - (IBAction)clearAllNode:(UIButton *)sender {
     self.curMode = '.';
     
-    for (int i=0; i< AST_LENGTH; i++) {
+    for (int i=0; i< AST_WIDE; i++) {
         
         NSMutableArray *arViews = self.nodeViewMap[i];
         
-        for (int j=0; j< AST_WIDE; j++) {
+        for (int j=0; j< AST_LENGTH; j++) {
             
             nodeMap[i][j] = '.';
             
@@ -219,6 +256,10 @@ char nodeMap[AST_WIDE][AST_LENGTH];
             tView.chart = '.';
         }
     }
+}
+
+- (IBAction)setMonster:(UIButton *)sender {
+    self.curMode = 'm'; //怪物
 }
 
 - (IBAction)setStartNode:(UIButton *)sender {
@@ -233,6 +274,86 @@ char nodeMap[AST_WIDE][AST_LENGTH];
     self.curMode = 'x';
 }
 
+- (IBAction)showMoGrap:(id)sender {
+    float addX = 10;
+    float addY = 60;
+    
+    //处理怪物图形
+    for (UIView *view in self.view.subviews) {
+        if (view.tag != TagMonster) { continue; }
+        
+        //怪物空间
+        float moW = view.frame.size.width;
+        float moH = view.frame.size.height;
+        
+        float moOrX = view.frame.origin.x;
+        float moOrY = view.frame.origin.y;
+        
+        float moButX = moOrX+moW;
+        float moButY = moOrY+moH;
+        //
+        
+        //网络用整形，减少CPU开支
+        //墙下标值
+        int lbx,lby; lbx=lby=0;
+        
+        for (float i=(moOrX); ; i+=self.cellWidth) {
+            
+            //特殊判断 【半部分在矩形内】
+            if (i>=moButX && (i-self.cellWidth)>moButX) {
+                
+                break;
+            }
+            
+            //执行下标计算
+            lbx = (i-addX)/self.cellWidth;
+            
+            
+            // 抛弃多余
+            if (moButX< ((lbx)*self.cellWidth+addX)) {
+                break;
+            }
+            
+            
+            if (lbx>=WIDE) { //数组越界，放弃
+                break;
+            }
+            
+            
+            for (float j=(moOrY); ; j+=self.cellHeight) {
+                
+                if (j>moButY) {
+                    break;
+                }
+                
+                lby = (j-addY)/self.cellHeight;
+                
+                // 抛弃多余
+                if (moButY< ((lby)*self.cellHeight+addY)) {
+                    break;
+                }
+                
+                if (lby>=LENGTH) { //数组越界，放弃
+                    break;
+                }
+                
+                UIView *bkView = self.nodeViewMap[lby][lbx];
+                bkView.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+                nodeMap[lbx][lby] = 'x';
+                
+                NSLog(@"x[%d] y[%d]",lbx,lby);
+                
+                UIView *ppView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 4, 4)] autorelease];
+                [ppView setCenter:CGPointMake(i, j)];
+                ppView.backgroundColor = [UIColor redColor];
+                [self.view addSubview:ppView];
+                
+            }
+        }
+    }
+}
+
+//开始查找
 - (IBAction)begainFindPath:(UIButton *)sender {
     
     
@@ -306,4 +427,21 @@ char nodeMap[AST_WIDE][AST_LENGTH];
 }
 
 
+- (void)dealloc {
+    [_tfWidth release];
+    [_tfHeight release];
+    [super dealloc];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void) deleteMonster:(UIButton*) sender
+{
+    [sender removeFromSuperview];
+    return;
+}
 @end

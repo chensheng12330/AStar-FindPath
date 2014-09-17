@@ -3,7 +3,7 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 // CAlgorithms
-enum{LENGTH=10,WIDE=10};//定义数组大小
+enum{LENGTH=20,WIDE=20};//定义数组大小
 enum{VIABLE, WALL, INOPEN, INCLOSE, STARTPOINT, DESTINATION};
 
 typedef struct Node
